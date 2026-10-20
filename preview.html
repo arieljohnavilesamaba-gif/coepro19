@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArielAmabaPortfolio — Minimalist Greek Classical Edition</title>
+  <meta name="description" content="Personal Portfolio of Ariel John A. Amaba — 4th-Year Computer Engineering Student at ICCT Colleges Main Campus Cainta. TESDA NCII Certified. Java, Python, React, and TypeScript.">
+  
+  <!-- Favicon: Classical Greek Geometric Sigil -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' fill='%23000'/><path d='M8 8h32v32H8z' fill='none' stroke='%23fff' stroke-width='2'/><path d='M16 16h16v16H16z' fill='none' stroke='%23fff' stroke-width='2'/><path d='M24 8v8M8 24h8M40 24h-8M24 40v-8' stroke='%23fff' stroke-width='2'/></svg>">
+
+  <!-- Immediate Theme Initializer to Prevent Flash of Unstyled Theme (FOUC) -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <!-- Google Fonts: Cinzel (Classical Roman/Greek Serif) & Inter (Clean Sans-Serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cinzel', 'Georgia', 'Times New Roman', 'serif'],
+            sans: ['Inter', 'Arial', 'Helvetica', 'sans-serif'],
+            mono: ['"Courier New"', 'Courier', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ======================================================== */
+    /* 1. STRICT MONOCHROME COLOR SYSTEM & THEME ARCHITECTURE */
+    /* ======================================================== */
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-subtle: #f8f8fa;
+      --surface: #ffffff;
+      --surface-subtle: #f2f2f4;
+      --surface-hover: #ececee;
+      --text-primary: #0a0a0a;
+      --text-secondary: #404040;
+      --text-muted: #737373;
+      --border: #e0e0e0;
+      --border-strong: #0a0a0a;
+      --border-subtle: #ececec;
+      --badge-bg: #f0f0f2;
+      --badge-text: #0a0a0a;
+      --code-bg: #f4f4f6;
+      --modal-bg: rgba(255, 255, 255, 0.98);
+      --modal-overlay: rgba(0, 0, 0, 0.6);
+      --meander-stroke: rgba(0, 0, 0, 0.22);
+      --column-stroke: rgba(0, 0, 0, 0.08);
+      --statue-filter: invert(0) grayscale(100%) contrast(110%) brightness(95%);
+      --statue-opacity: 0.12;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #09090b;
+      --bg-subtle: #0f0f13;
+      --surface: #121217;
+      --surface-subtle: #18181f;
+      --surface-hover: #202029;
+      --text-primary: #fafafa;
+      --text-secondary: #c2c2c7;
+      --text-muted: #85858e;
+      --border: #26262e;
+      --border-strong: #fafafa;
+      --border-subtle: #1c1c22;
+      --badge-bg: #1c1c24;
+      --badge-text: #fafafa;
+      --code-bg: #111116;
+      --modal-bg: rgba(14, 14, 18, 0.98);
+      --modal-overlay: rgba(0, 0, 0, 0.85);
+      --meander-stroke: rgba(255, 255, 255, 0.22);
+      --column-stroke: rgba(255, 255, 255, 0.07);
+      --statue-filter: invert(1) grayscale(100%) contrast(115%) brightness(90%);
+      --statue-opacity: 0.08;
+    }
+
+    /* Core Document Layout */
+    html, body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Restrained Classical Typography */
+    h1, h2, h3, h4, h5, h6, .classical-serif {
+      font-family: 'Cinzel', Georgia, 'Times New Roman', serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+
+    /* Subdued Body and Captions */
+    p, span, li, button, input, textarea {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+    }
+
+    /* Sleek Monochrome Scrollbar */
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    /* Hairline Greek Key / Meander Ribbon */
+    .greek-meander {
+      width: 100%;
+      height: 14px;
+      opacity: 0.85;
+      background-repeat: repeat-x;
+      background-size: 28px 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cpath d='M0,2 H24 V12 H10 V6 H18 V8 H12' fill='none' stroke='%23888' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
+    }
+
+    [data-theme="dark"] .greek-meander {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cpath d='M0,2 H24 V12 H10 V6 H18 V8 H12' fill='none' stroke='%23aaa' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E");
+    }
+
+    /* Subtle Architectural Grid */
+    .classical-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Typewriter Cursor */
+    .cursor-blink {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      vertical-align: -0.12em;
+      background-color: var(--text-primary);
+      animation: blink 0.9s infinite;
+    }
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body class="selection:bg-neutral-800 selection:text-white dark:selection:bg-neutral-200 dark:selection:text-black">
+
+  <!-- ======================================================== -->
+  <!-- 2. CLASSICAL GREEK BACKGROUND: MARBLE ARCHITECTURE & STATUARY -->
+  <!-- ======================================================== -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+    
+    <!-- Classical Greek Fluted Columns (Left and Right Margins) -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" style="stroke: var(--column-stroke);">
+      <!-- Left Doric Pillar -->
+      <g stroke-width="1.2" fill="none">
+        <rect x="20" y="0" width="70" height="24" stroke-width="1.8"/>
+        <line x1="20" y1="24" x2="90" y2="24"/>
+        <line x1="30" y1="24" x2="30" y2="100%"/>
+        <line x1="43" y1="24" x2="43" y2="100%"/>
+        <line x1="55" y1="24" x2="55" y2="100%"/>
+        <line x1="67" y1="24" x2="67" y2="100%"/>
+        <line x1="80" y1="24" x2="80" y2="100%"/>
+      </g>
+      <!-- Right Doric Pillar -->
+      <g stroke-width="1.2" fill="none">
+        <rect x="calc(100% - 90px)" y="0" width="70" height="24" stroke-width="1.8"/>
+        <line x1="calc(100% - 90px)" y1="24" x2="calc(100% - 20px)" y2="24"/>
+        <line x1="calc(100% - 80px)" y1="24" x2="calc(100% - 80px)" y2="100%"/>
+        <line x1="calc(100% - 67px)" y1="24" x2="calc(100% - 67px)" y2="100%"/>
+        <line x1="calc(100% - 55px)" y1="24" x2="calc(100% - 55px)" y2="100%"/>
+        <line x1="calc(100% - 43px)" y1="24" x2="calc(100% - 43px)" y2="100%"/>
+        <line x1="calc(100% - 30px)" y1="24" x2="calc(100% - 30px)" y2="100%"/>
+      </g>
+    </svg>
+
+    <!-- Subtle Centered Parthenon Pediment & Classical Geometric Crest -->
+    <svg class="absolute top-12 left-1/2 -translate-x-1/2 w-[700px] max-w-full h-48 opacity-[0.05] dark:opacity-[0.06] pointer-events-none" viewBox="0 0 700 180" fill="none" stroke="currentColor">
+      <!-- Pediment Triangle -->
+      <polygon points="350,15 40,140 660,140" stroke-width="2"/>
+      <line x1="20" y1="140" x2="680" y2="140" stroke-width="2.5"/>
+      <line x1="20" y1="150" x2="680" y2="150" stroke-width="2"/>
+      <!-- Internal Classical Columns -->
+      <line x1="120" y1="150" x2="120" y2="180" stroke-width="2"/>
+      <line x1="200" y1="150" x2="200" y2="180" stroke-width="2"/>
+      <line x1="280" y1="150" x2="280" y2="180" stroke-width="2"/>
+      <line x1="350" y1="150" x2="350" y2="180" stroke-width="2"/>
+      <line x1="420" y1="150" x2="420" y2="180" stroke-width="2"/>
+      <line x1="500" y1="150" x2="500" y2="180" stroke-width="2"/>
+      <line x1="580" y1="150" x2="580" y2="180" stroke-width="2"/>
+      <!-- Apollo Sun & Athena Laurel Centerpiece -->
+      <circle cx="350" cy="95" r="28" stroke-width="1.5"/>
+      <circle cx="350" cy="95" r="18" stroke-width="1"/>
+      <line x1="350" y1="60" x2="350" y2="67" stroke-width="1.5"/>
+      <line x1="350" y1="123" x2="350" y2="130" stroke-width="1.5"/>
+      <line x1="315" y1="95" x2="322" y2="95" stroke-width="1.5"/>
+      <line x1="378" y1="95" x2="385" y2="95" stroke-width="1.5"/>
+    </svg>
+
+    <!-- Hero Classical Statue Vector (Athena / Apollo Sculpted Bust) with Negative Space -->
+    <div class="absolute right-0 top-20 w-[420px] max-w-[45vw] h-[580px] pointer-events-none opacity-[var(--statue-opacity)] transition-opacity duration-300">
+      <svg class="w-full h-full" viewBox="0 0 400 550" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Classical Bust Plinth -->
+        <rect x="130" y="490" width="140" height="35" stroke-width="2"/>
+        <line x1="110" y1="525" x2="290" y2="525" stroke-width="2.5"/>
+        <!-- Torso & Draped Marble Toga -->
+        <path d="M140 490 C130 420 90 380 70 340 C110 350 160 360 200 360 C240 360 290 350 330 340 C310 380 270 420 260 490 Z" stroke-width="1.8"/>
+        <path d="M120 370 C160 400 240 400 280 370" stroke-width="1.2"/>
+        <path d="M140 400 C170 430 230 430 260 400" stroke-width="1.2"/>
+        <path d="M155 430 C180 455 220 455 245 430" stroke-width="1.2"/>
+        <!-- Neck & Chin -->
+        <path d="M175 350 L175 290 C175 270 225 270 225 290 L225 350" stroke-width="1.8"/>
+        <!-- Sculpted Classical Head & Face Profile -->
+        <path d="M165 245 C155 220 155 170 180 145 C190 135 210 135 220 145 C245 170 245 220 235 245 C230 270 170 270 165 245 Z" stroke-width="1.8"/>
+        <!-- Classical Features (Minimalist Sculptor Contours) -->
+        <path d="M195 180 L205 195 L198 205" stroke-width="1.2"/>
+        <path d="M195 218 C198 220 202 220 205 218" stroke-width="1.2"/>
+        <path d="M182 175 C186 172 192 172 196 175" stroke-width="1"/>
+        <path d="M204 175 C208 172 214 172 218 175" stroke-width="1"/>
+        <!-- Athena's Classical Crested Helmet & Laurel Wreath -->
+        <path d="M155 160 C155 110 175 80 200 70 C225 80 245 110 245 160 Z" stroke-width="2"/>
+        <path d="M200 40 L200 70" stroke-width="2.5"/>
+        <path d="M180 40 C190 20 210 20 220 40 C215 55 185 55 180 40 Z" stroke-width="1.8"/>
+        <!-- Crest Flow -->
+        <path d="M195 40 C170 30 140 50 130 90" stroke-width="1.5"/>
+        <path d="M205 40 C230 30 260 50 270 90" stroke-width="1.5"/>
+        <!-- Laurel Leaves Framing the Temple -->
+        <path d="M150 175 C145 165 140 180 150 185" stroke-width="1.2"/>
+        <path d="M250 175 C255 165 260 180 250 185" stroke-width="1.2"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 3. MINIMALIST NAVIGATION BAR WITH THEME TOGGLE -->
+  <!-- ======================================================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-colors duration-200 border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-md py-3">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- Brand Logo / Classical Identity -->
+        <a href="#hero" class="flex items-center gap-2.5 group focus:outline-none">
+          <div class="w-8 h-8 rounded border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] transition-transform group-hover:scale-105">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16v16H4z"/>
+              <path d="M4 12h16M12 4v16"/>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="classical-serif text-sm font-bold tracking-wider text-[var(--text-primary)]">
+              ArielAmabaPortfolio
+            </span>
+            <span class="text-[10px] text-[var(--text-muted)] tracking-widest uppercase">
+              BSCpE • ICCT Colleges 2026
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 text-xs tracking-wider uppercase">
+          <a href="#about" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">About</a>
+          <a href="#featured-project" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors font-semibold">Featured</a>
+          <a href="#skills" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Skills</a>
+          <a href="#projects" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Projects</a>
+          <a href="#timeline" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Timeline</a>
+          <a href="#contact" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Controls: Functional Theme Switcher + Résumé + GitHub -->
+        <div class="flex items-center gap-3">
+          
+          <!-- Monochromatic Theme Toggle Switch -->
+          <button
+            id="themeToggleBtn"
+            onclick="toggleTheme()"
+            aria-label="Toggle monochrome color theme"
+            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded border border-[var(--border)] hover:border-[var(--border-strong)] bg-[var(--surface-subtle)] text-[var(--text-primary)] text-xs font-mono transition-all"
+            title="Switch theme (Light / Dark)"
+          >
+            <!-- Sun Icon (for Light Mode) -->
+            <svg id="themeIconSun" class="w-3.5 h-3.5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <!-- Moon Icon (for Dark Mode) -->
+            <svg id="themeIconMoon" class="w-3.5 h-3.5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span id="themeLabelText" class="text-[11px] tracking-wider uppercase font-semibold">THEME</span>
+          </button>
+
+          <!-- Official Résumé Modal Trigger -->
+          <button
+            onclick="toggleResumeModal(true)"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] hover:opacity-90 text-xs font-medium tracking-wide transition-opacity"
+          >
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Résumé</span>
+          </button>
+
+          <!-- GitHub Link -->
+          <a
+            href="https://github.com/arieljohnavilesamaba-gif"
+            target="_blank"
+            rel="noreferrer"
+            class="p-1.5 rounded border border-[var(--border)] hover:border-[var(--border-strong)] text-[var(--text-primary)] transition-colors"
+            title="GitHub: @arieljohnavilesamaba-gif"
+            aria-label="GitHub Profile"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button
+            onclick="toggleMobileMenu()"
+            class="md:hidden p-1.5 rounded border border-[var(--border)] text-[var(--text-primary)]"
+            aria-label="Toggle navigation menu"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobileMenu" class="hidden md:hidden pt-4 pb-2 border-t border-[var(--border)] mt-3 flex flex-col gap-3 text-xs uppercase tracking-wider">
+        <a href="#about" onclick="toggleMobileMenu()" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1">About</a>
+        <a href="#featured-project" onclick="toggleMobileMenu()" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1">Featured Project</a>
+        <a href="#skills" onclick="toggleMobileMenu()" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1">Technical Skills</a>
+        <a href="#projects" onclick="toggleMobileMenu()" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1">All Projects</a>
+        <a href="#timeline" onclick="toggleMobileMenu()" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1">Academic Timeline</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1">Contact Details</a>
+        <button onclick="toggleResumeModal(true); toggleMobileMenu();" class="text-left py-1 text-[var(--text-primary)] font-bold">Open Résumé</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 4. HERO SECTION: MINIMALIST GREEK MYTHOLOGY & CODE -->
+  <!-- ======================================================== -->
+  <section id="hero" class="relative pt-32 pb-16 md:pt-40 md:pb-24 border-b border-[var(--border)] classical-grid z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Understated Classical Ribbon -->
+      <div class="flex items-center gap-2 mb-6 text-xs text-[var(--text-muted)] tracking-widest uppercase">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--text-primary)]"></span>
+        <span>Olympian Minimalist Edition // Computer Engineering & Software</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- Left Column: Primary Identity & Restrained Typography -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left">
+          
+          <!-- Classical Title Hierarchy -->
+          <div class="mb-4">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-[var(--border)] bg-[var(--surface-subtle)] text-[10px] font-mono text-[var(--text-muted)] tracking-wider uppercase mb-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--text-primary)] animate-pulse"></span>
+              <span>ICCT Colleges Cainta // Class of 2026</span>
+            </div>
+            <h1 class="classical-serif text-3xl sm:text-4xl md:text-5xl font-black text-[var(--text-primary)] tracking-tight leading-[1.15]">
+              ArielAmabaPortfolio
+            </h1>
+            <p class="text-sm font-semibold text-[var(--text-secondary)] mt-1.5 tracking-wide">
+              Ariel John A. Amaba • 4th-Year Computer Engineering Student
+            </p>
+          </div>
+
+          <!-- Restrained Typewriter (Classical & Compact) -->
+          <div class="min-h-[38px] mb-6 flex items-center">
+            <span class="text-base sm:text-lg text-[var(--text-secondary)] font-normal">
+              Specializing in <span id="typewriterText" class="font-bold text-[var(--text-primary)]"></span><span class="cursor-blink"></span>
+            </span>
+          </div>
+
+          <!-- Narrative Bio: Grounded in Classical Mythology & Engineering Precision -->
+          <p class="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl mb-8">
+            Inspired by the Promethean spark of algorithmic forethought and the forge of Hephaestus: uniting high-voltage electrical diagnostics certified in <strong class="text-[var(--text-primary)]">TESDA NCII Electrical Installation & Management</strong> with clean software engineering in <strong class="text-[var(--text-primary)]">Java (OOP)</strong>, <strong class="text-[var(--text-primary)]">Python</strong>, and modern web architectures in <strong class="text-[var(--text-primary)]">React & TypeScript</strong>.
+          </p>
+
+          <!-- Action Buttons (Monochrome, Compact) -->
+          <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto mb-10">
+            <a
+              href="#featured-project"
+              class="px-5 py-2.5 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] text-xs font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity"
+            >
+              Explore Featured Project →
+            </a>
+
+            <button
+              onclick="toggleResumeModal(true)"
+              class="px-5 py-2.5 rounded border border-[var(--border)] hover:border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text-primary)] text-xs font-semibold tracking-wider uppercase transition-colors"
+            >
+              View Official Résumé
+            </button>
+
+            <a
+              href="https://github.com/arieljohnavilesamaba-gif"
+              target="_blank"
+              rel="noreferrer"
+              class="px-3.5 py-2.5 rounded border border-[var(--border)] hover:border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono transition-colors"
+            >
+              @arieljohnavilesamaba-gif
+            </a>
+          </div>
+
+          <!-- Key Metrics Counter: Quantitative Qualifications (ZERO SKILL PERCENTAGES) -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full pt-6 border-t border-[var(--border)]">
+            <div class="p-3 rounded border border-[var(--border)] bg-[var(--surface)]">
+              <div class="classical-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">4th Year</div>
+              <div class="text-[11px] text-[var(--text-muted)] font-medium mt-0.5">ICCT Colleges BSCpE</div>
+            </div>
+
+            <div class="p-3 rounded border border-[var(--border)] bg-[var(--surface)]">
+              <div class="classical-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">2026</div>
+              <div class="text-[11px] text-[var(--text-muted)] font-medium mt-0.5">Graduation Year</div>
+            </div>
+
+            <div class="p-3 rounded border border-[var(--border)] bg-[var(--surface)]">
+              <div class="classical-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">TESDA NCII</div>
+              <div class="text-[11px] text-[var(--text-muted)] font-medium mt-0.5">Electrical Certified</div>
+            </div>
+
+            <div class="p-3 rounded border border-[var(--border)] bg-[var(--surface)]">
+              <div class="classical-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)]">Active</div>
+              <div class="text-[11px] text-[var(--text-muted)] font-medium mt-0.5">GitHub CI/CD</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Personal Portrait on the Right & Terminal Console -->
+        <div class="lg:col-span-5 w-full flex flex-col items-center">
+          
+          <!-- Classical Circular Personal Portrait Frame -->
+          <div class="relative flex flex-col items-center mb-8 w-full max-w-sm">
+            
+            <!-- Classical Header Ribbon -->
+            <div class="flex items-center justify-between w-full px-2 mb-3 text-[10px] font-mono tracking-widest text-[var(--text-muted)] uppercase">
+              <span>EST. 2026</span>
+              <span class="classical-serif font-bold tracking-wider text-[var(--text-primary)]">ATHENA • APOLLO</span>
+              <span>BSCpE</span>
+            </div>
+
+            <!-- Concentric Classical Rings Medallion -->
+            <div class="relative p-2.5 rounded-full border-2 border-[var(--border-strong)] bg-[var(--surface)] shadow-sm group">
+              <!-- Subtle Hairline Inner Ring -->
+              <div class="relative w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 rounded-full border border-[var(--border)] overflow-hidden bg-[var(--surface-subtle)]">
+                
+                <!-- Ariel John A. Amaba's Personal Photo (Original Natural Color) -->
+                <img
+                  id="heroPersonalPhoto"
+                  src="assets/images/profile.jpg"
+                  alt="Ariel John A. Amaba - Computer Engineering & Software Developer"
+                  class="w-full h-full rounded-full object-cover transition-all duration-500 group-hover:scale-105"
+                  style="object-position: center 32%;"
+                  onerror="if(this.src.indexOf('media_1792505024991_d4551121.jpg')===-1){this.src='file:///C:/Users/Ayee%20Aviles/.gemini/antigravity/brain/c3a38b6a-4ca9-488c-9b2b-d0911361bf09/.user_uploaded/media_1792505024991_d4551121.jpg';}else{this.style.display='none';document.getElementById('heroPhotoFallback').classList.remove('hidden');}"
+                />
+
+                <!-- High-Reliability Fallback in case image is blocked -->
+                <div id="heroPhotoFallback" class="hidden w-full h-full rounded-full flex flex-col items-center justify-center font-mono text-[var(--text-primary)] bg-[var(--surface)] p-4 text-center">
+                  <span class="classical-serif font-bold text-3xl mb-1">AA</span>
+                  <span class="text-xs font-bold tracking-wider">Ariel John A. Amaba</span>
+                  <span class="text-[10px] text-[var(--text-muted)] mt-1">BSCpE • ICCT Colleges</span>
+                </div>
+              </div>
+
+              <!-- Top Classical Pediment Accent Tag -->
+              <div class="absolute -top-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded border border-[var(--border)] bg-[var(--bg)] text-[9px] font-mono tracking-widest text-[var(--text-primary)] uppercase font-semibold whitespace-nowrap shadow-xs">
+                ENGINEER // SCHOLAR
+              </div>
+
+              <!-- Bottom Classical Nameplate Badge -->
+              <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded border border-[var(--border-strong)] bg-[var(--surface)] text-[11px] classical-serif font-bold text-[var(--text-primary)] uppercase tracking-wider whitespace-nowrap shadow-xs">
+                Ariel John A. Amaba
+              </div>
+            </div>
+
+            <!-- Classical Architectural Caption -->
+            <div class="mt-5 text-center px-4">
+              <p class="text-xs font-mono text-[var(--text-secondary)]">
+                Bachelor of Science in Computer Engineering
+              </p>
+              <p class="text-[11px] font-mono text-[var(--text-muted)] mt-0.5">
+                ICCT Colleges Cainta • Class of 2026
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Monochrome Code Terminal (Preserved Right Below Photo) -->
+          <div class="w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] overflow-hidden shadow-sm">
+            
+            <!-- Terminal Header -->
+            <div class="flex items-center justify-between px-3.5 py-2 border-b border-[var(--border)] bg-[var(--surface-subtle)]">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full border border-[var(--border)] bg-[var(--text-muted)]/30"></span>
+                <span class="w-2.5 h-2.5 rounded-full border border-[var(--border)] bg-[var(--text-muted)]/30"></span>
+                <span class="w-2.5 h-2.5 rounded-full border border-[var(--border)] bg-[var(--text-muted)]/30"></span>
+                <span class="ml-2 font-mono text-[11px] text-[var(--text-muted)]">terminal.cpe</span>
+              </div>
+
+              <!-- Tab Buttons -->
+              <div class="flex items-center gap-1">
+                <button
+                  id="tabBtnProfile"
+                  onclick="switchTab('profile')"
+                  class="px-2 py-0.5 rounded text-[11px] font-mono border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text-primary)] font-semibold"
+                >
+                  profile.ts
+                </button>
+                <button
+                  id="tabBtnPython"
+                  onclick="switchTab('python')"
+                  class="px-2 py-0.5 rounded text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+                >
+                  logic.py
+                </button>
+                <button
+                  id="tabBtnCli"
+                  onclick="switchTab('cli')"
+                  class="px-2 py-0.5 rounded text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+                >
+                  cli
+                </button>
+              </div>
+            </div>
+
+            <!-- Tab 1: TypeScript Profile -->
+            <div id="tabContentProfile" class="p-4 font-mono text-xs leading-relaxed text-[var(--text-secondary)] bg-[var(--code-bg)] min-h-[290px]">
+              <p class="text-[var(--text-muted)]">// ICCT Colleges BSCpE Profile</p>
+              <p><span class="text-[var(--text-primary)] font-bold">const</span> engineer = {</p>
+              <div class="pl-4 space-y-0.5">
+                <p>name: <span class="text-[var(--text-primary)]">"Ariel John A. Amaba"</span>,</p>
+                <p>title: <span class="text-[var(--text-primary)]">"ArielAmabaPortfolio"</span>,</p>
+                <p>institution: <span class="text-[var(--text-primary)]">"ICCT Colleges Main Campus Cainta"</span>,</p>
+                <p>academicYear: <span class="text-[var(--text-primary)]">"4th-Year (2026)"</span>,</p>
+                <p>credentials: [</p>
+                <div class="pl-4 text-[var(--text-muted)]">
+                  <p>"TESDA NCII Electrical Installation & Management",</p>
+                  <p>"On-the-Job Training Student Teacher Practicum"</p>
+                </div>
+                <p>],</p>
+                <p>coreLanguages: [<span class="text-[var(--text-primary)]">"Java (OOP)"</span>, <span class="text-[var(--text-primary)]">"Python"</span>, <span class="text-[var(--text-primary)]">"TypeScript"</span>]</p>
+              </div>
+              <p>};</p>
+            </div>
+
+            <!-- Tab 2: Python Code -->
+            <div id="tabContentPython" class="hidden p-4 font-mono text-xs leading-relaxed text-[var(--text-secondary)] bg-[var(--code-bg)] min-h-[290px]">
+              <p class="text-[var(--text-muted)]"># Promethean Algorithmic Script</p>
+              <p><span class="text-[var(--text-primary)] font-bold">class</span> <span class="text-[var(--text-primary)] font-semibold">ComputerEngineer</span>:</p>
+              <div class="pl-4 space-y-0.5">
+                <p><span class="text-[var(--text-primary)] font-bold">def</span> __init__(self):</p>
+                <p class="pl-4">self.author = <span class="text-[var(--text-primary)]">"Ariel John A. Amaba"</span></p>
+                <p class="pl-4">self.certified = <span class="text-[var(--text-primary)]">"TESDA NCII Electrical"</span></p>
+                <p class="pl-4">self.school = <span class="text-[var(--text-primary)]">"ICCT Colleges"</span></p>
+                <p><span class="text-[var(--text-primary)] font-bold">def</span> execute_architecture(self):</p>
+                <p class="pl-4"><span class="text-[var(--text-primary)] font-bold">return</span> <span class="text-[var(--text-primary)]">"Engineered with rigor & precision."</span></p>
+              </div>
+              <p class="mt-2 text-[var(--text-muted)]">cpe = ComputerEngineer()</p>
+              <p>print(cpe.execute_architecture())</p>
+            </div>
+
+            <!-- Tab 3: Interactive CLI Runner -->
+            <div id="tabContentCli" class="hidden p-4 font-mono text-xs leading-relaxed text-[var(--text-secondary)] bg-[var(--code-bg)] min-h-[290px] flex flex-col justify-between">
+              <div>
+                <p class="text-[var(--text-muted)]">// Interactive Monochrome Terminal</p>
+                <p class="text-[11px] text-[var(--text-muted)] mb-2">Execute verified commands:</p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <button onclick="runCli('skills')" class="px-2 py-0.5 rounded border border-[var(--border)] hover:border-[var(--border-strong)] text-[10px] text-[var(--text-primary)] bg-[var(--surface)]">
+                    $ skills()
+                  </button>
+                  <button onclick="runCli('credentials')" class="px-2 py-0.5 rounded border border-[var(--border)] hover:border-[var(--border-strong)] text-[10px] text-[var(--text-primary)] bg-[var(--surface)]">
+                    $ credentials()
+                  </button>
+                  <button onclick="runCli('contact')" class="px-2 py-0.5 rounded border border-[var(--border)] hover:border-[var(--border-strong)] text-[10px] text-[var(--text-primary)] bg-[var(--surface)]">
+                    $ contact()
+                  </button>
+                  <button onclick="runCli('clear')" class="px-2 py-0.5 rounded border border-[var(--border)] text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+                    $ clear
+                  </button>
+                </div>
+                <div id="cliOutput" class="p-2.5 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] font-mono text-[11px] min-h-[120px] whitespace-pre-wrap">ariel@cpe-terminal:~$ ready. Click a command above.</div>
+              </div>
+              <div class="pt-2 text-[10px] text-[var(--text-muted)] border-t border-[var(--border)] flex justify-between">
+                <span>sh / zsh</span>
+                <span>STATUS: OPERATIONAL</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Greek Meander Frieze Divider -->
+  <div class="greek-meander" aria-hidden="true"></div>
+
+  <!-- ======================================================== -->
+  <!-- 5. ABOUT ME: PHILOSOPHY & ACADEMIC CREDENTIALS -->
+  <!-- ======================================================== -->
+  <section id="about" class="py-16 md:py-20 border-b border-[var(--border)] bg-[var(--bg)] reveal">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col items-start mb-10">
+        <div class="text-[11px] font-bold text-[var(--text-muted)] tracking-widest uppercase mb-1">
+          01 // Academic Foundation
+        </div>
+        <h2 class="classical-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+          Engineering Philosophy & Background
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Narrative Statement -->
+        <div class="lg:col-span-7 space-y-4 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+          <p class="font-medium text-[var(--text-primary)] italic border-l-2 border-[var(--border-strong)] pl-4 py-1">
+            "I am a 4th-year Computer Engineering student at ICCT Colleges Main Campus Cainta. I am committed to advancing my technical skills in programming, digital systems, and practical electrical engineering."
+          </p>
+          <p>
+            In Greek classical thought, <strong class="text-[var(--text-primary)]">Prometheus</strong> embodied the spark of intellectual discovery, while <strong class="text-[var(--text-primary)]">Hephaestus</strong> represented the master craftsman who built resilient, indestructible physical artifacts. As a Computer Engineering student, I adhere to this exact dual discipline.
+          </p>
+          <p>
+            With formal national certification in <strong class="text-[var(--text-primary)]">TESDA NCII Electrical Installation and Management</strong>, I apply rigorous safety, schematic analysis, and diagnostic procedures. In the software domain, I focus on clean Object-Oriented Programming (OOP) in <strong class="text-[var(--text-primary)]">Java</strong>, algorithmic automation in <strong class="text-[var(--text-primary)]">Python</strong>, and modern component systems with <strong class="text-[var(--text-primary)]">React, TypeScript, and Tailwind CSS</strong>.
+          </p>
+          <p>
+            Additionally, my On-the-Job Training (OJT) as a Student Teacher strengthened my communication, patience, structured mentoring, and leadership abilities.
+          </p>
+        </div>
+
+        <!-- Right: Portrait & Verified Credentials Box -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Candidate Formal Portrait Frame -->
+          <div class="p-4 rounded-lg border border-[var(--border)] bg-[var(--surface)] flex items-center gap-4">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg border border-[var(--border-strong)] overflow-hidden shrink-0 bg-[var(--surface-subtle)]">
+              <img
+                src="assets/images/profile.jpg"
+                alt="Ariel John A. Amaba - Formal Portrait"
+                class="w-full h-full object-cover"
+                style="object-position: center 32%;"
+                onerror="if(this.src.indexOf('media_1792505024991_d4551121.jpg')===-1){this.src='file:///C:/Users/Ayee%20Aviles/.gemini/antigravity/brain/c3a38b6a-4ca9-488c-9b2b-d0911361bf09/.user_uploaded/media_1792505024991_d4551121.jpg';}else{this.style.display='none';document.getElementById('aboutPhotoFallback').classList.remove('hidden');}"
+              />
+              <div id="aboutPhotoFallback" class="hidden w-full h-full flex flex-col items-center justify-center font-mono text-[var(--text-muted)] bg-[var(--surface-subtle)]">
+                <span class="classical-serif font-bold text-base text-[var(--text-primary)]">AA</span>
+                <span class="text-[9px] uppercase tracking-wider mt-0.5">Profile Photo</span>
+              </div>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)]">Candidate Portrait</div>
+              <h3 class="classical-serif text-base font-bold text-[var(--text-primary)]">Ariel John A. Amaba</h3>
+              <p class="text-xs text-[var(--text-secondary)] font-mono mt-0.5">
+                BSCpE Student • ICCT Colleges
+              </p>
+              <div class="mt-2 text-[10px] font-mono text-[var(--text-muted)] flex items-center gap-1.5">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--text-primary)]"></span>
+                <span>Active Candidate (Class of 2026)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Core Competencies Box -->
+          <div class="p-6 rounded-lg border border-[var(--border)] bg-[var(--surface)] space-y-4">
+            <h3 class="classical-serif text-base font-bold text-[var(--text-primary)] border-b border-[var(--border)] pb-2">
+              Verified Credentials & Status
+            </h3>
+          <ul class="space-y-3 text-xs text-[var(--text-secondary)]">
+            <li class="flex items-start gap-2">
+              <span class="text-[var(--text-primary)] font-bold">▪</span>
+              <span><strong>ICCT Colleges Main Campus Cainta:</strong> 4th-Year Bachelor of Science in Computer Engineering (BSCpE, Expected 2026).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[var(--text-primary)] font-bold">▪</span>
+              <span><strong>TESDA NCII National Certification:</strong> Electrical Installation and Management (Wiring, Circuit Diagnostics, Standards).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[var(--text-primary)] font-bold">▪</span>
+              <span><strong>Teaching Practicum:</strong> Completed On-the-Job Training (OJT) as Student Teacher.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[var(--text-primary)] font-bold">▪</span>
+              <span><strong>Eastern Star Academy:</strong> Humanities and Social Sciences (HUMSS) foundational graduate.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[var(--text-primary)] font-bold">▪</span>
+              <span><strong>GitHub Repository:</strong> Active version control via <code class="text-[var(--text-primary)]">@arieljohnavilesamaba-gif</code>.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Greek Meander Frieze Divider -->
+  <div class="greek-meander" aria-hidden="true"></div>
+
+  <!-- ======================================================== -->
+  <!-- 6. PRIMARY FEATURED PROJECT: GITHUB PORTFOLIO -->
+  <!-- ======================================================== -->
+  <section id="featured-project" class="py-16 md:py-20 border-b border-[var(--border)] bg-[var(--bg-subtle)] reveal">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col items-start mb-8">
+        <div class="text-[11px] font-bold text-[var(--text-muted)] tracking-widest uppercase mb-1">
+          02 // Primary Featured Project
+        </div>
+        <h2 class="classical-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+          Personal GitHub Portfolio Architecture
+        </h2>
+        <p class="text-sm text-[var(--text-secondary)] mt-1 max-w-2xl">
+          Engineered as a real software project featuring React 18, TypeScript 5, Vite, Tailwind CSS, and automated CI/CD deployment via GitHub Actions.
+        </p>
+      </div>
+
+      <!-- Featured Card (Monochrome, Elegant, Compact) -->
+      <div class="rounded-lg border border-[var(--border)] bg-[var(--surface)] overflow-hidden shadow-sm">
+        
+        <div class="p-6 sm:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-7 flex flex-col justify-between">
+              <div>
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                  <span class="px-2.5 py-0.5 rounded text-[11px] uppercase tracking-wider font-semibold border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)]">
+                    Software Development
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded text-[11px] font-mono border border-[var(--border)] text-[var(--text-secondary)] bg-[var(--surface-subtle)]">
+                    ● GitHub Actions Active
+                  </span>
+                </div>
+
+                <h3 class="classical-serif text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-2">
+                  ArielAmabaPortfolio (Featured Project)
+                </h3>
+
+                <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                  A professional, responsive website designed to demonstrate software engineering discipline, strict type safety, verified academic credentials, and automated zero-downtime deployment.
+                </p>
+
+                <!-- Purpose & Specifications -->
+                <div class="p-3.5 rounded border border-[var(--border)] bg-[var(--surface-subtle)] mb-4 text-xs text-[var(--text-secondary)] space-y-1.5">
+                  <div class="font-bold text-[var(--text-primary)] uppercase tracking-wider text-[11px]">Core Architecture Requirements</div>
+                  <p>▹ Single-page responsive interface optimized for speed and accessibility.</p>
+                  <p>▹ Persistent, flash-free monochrome theme system (Light & Dark modes).</p>
+                  <p>▹ Automated GitHub Actions workflow testing and building to GitHub Pages.</p>
+                  <p>▹ Complete documentation of installation, scripts, and build verification.</p>
+                </div>
+              </div>
+
+              <!-- Tech Stack & Links -->
+              <div>
+                <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-[11px]">
+                  <span class="px-2 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">React 18</span>
+                  <span class="px-2 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">TypeScript 5</span>
+                  <span class="px-2 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Vite</span>
+                  <span class="px-2 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Tailwind CSS</span>
+                  <span class="px-2 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">GitHub Actions</span>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-[var(--border)]">
+                  <a
+                    href="https://github.com/arieljohnavilesamaba-gif/personal-github-portfolio"
+                    target="_blank"
+                    rel="noreferrer"
+                    class="px-4 py-2 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] text-xs font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity"
+                  >
+                    View Repository on GitHub
+                  </a>
+                  <button
+                    onclick="toggleResumeModal(true)"
+                    class="px-4 py-2 rounded border border-[var(--border)] hover:border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text-primary)] text-xs font-semibold tracking-wider uppercase transition-colors"
+                  >
+                    View Attached Résumé
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Architectural Verification Matrix -->
+            <div class="lg:col-span-5 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-[var(--border)] pt-6 lg:pt-0 lg:pl-6 space-y-4">
+              <div>
+                <h4 class="classical-serif text-xs uppercase tracking-wider text-[var(--text-primary)] font-bold mb-3">
+                  Production Engineering Metrics
+                </h4>
+                <div class="space-y-2 text-xs font-mono">
+                  <div class="p-2.5 rounded border border-[var(--border)] bg-[var(--surface-subtle)] flex justify-between items-center">
+                    <span class="text-[var(--text-secondary)]">Type Safety:</span>
+                    <span class="font-bold text-[var(--text-primary)]">Strict TypeScript 5</span>
+                  </div>
+                  <div class="p-2.5 rounded border border-[var(--border)] bg-[var(--surface-subtle)] flex justify-between items-center">
+                    <span class="text-[var(--text-secondary)]">Design System:</span>
+                    <span class="font-bold text-[var(--text-primary)]">Monochrome CSS Variables</span>
+                  </div>
+                  <div class="p-2.5 rounded border border-[var(--border)] bg-[var(--surface-subtle)] flex justify-between items-center">
+                    <span class="text-[var(--text-secondary)]">CI/CD Pipeline:</span>
+                    <span class="font-bold text-[var(--text-primary)]">GitHub Actions Passing</span>
+                  </div>
+                  <div class="p-2.5 rounded border border-[var(--border)] bg-[var(--surface-subtle)] flex justify-between items-center">
+                    <span class="text-[var(--text-secondary)]">Lighthouse Score:</span>
+                    <span class="font-bold text-[var(--text-primary)]">Optimized & Accessible</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CI/CD Flow Illustration -->
+              <div class="p-3.5 rounded border border-[var(--border)] bg-[var(--surface-subtle)] text-[11px] font-mono text-[var(--text-secondary)] space-y-1">
+                <div class="font-bold text-[var(--text-primary)] uppercase text-[10px]">Zero-Downtime Pipeline</div>
+                <p>git push (main) ➔ vite build ➔ github pages deploy</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Greek Meander Frieze Divider -->
+  <div class="greek-meander" aria-hidden="true"></div>
+
+  <!-- ======================================================== -->
+  <!-- 7. TECHNICAL SKILLS MATRIX (ZERO PERCENTAGES) -->
+  <!-- ======================================================== -->
+  <section id="skills" class="py-16 md:py-20 border-b border-[var(--border)] bg-[var(--bg)] reveal">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col items-start mb-10">
+        <div class="text-[11px] font-bold text-[var(--text-muted)] tracking-widest uppercase mb-1">
+          03 // Technical Competencies
+        </div>
+        <h2 class="classical-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+          Skills & Architectural Proficiencies
+        </h2>
+        <p class="text-sm text-[var(--text-secondary)] mt-1 max-w-2xl">
+          A structured competency matrix spanning programming languages, hardware standards, and modern web development. All percentages have been intentionally eliminated in favor of verified qualitative tiers.
+        </p>
+      </div>
+
+      <!-- Skills Grid: 9 Rigorous Cards with Pantheon Identity -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- Python -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">Python</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                Advanced
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Scripting, automated workflows, computational logic, data transformation, and algorithmic problem-solving.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Automation</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Algorithms</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">File I/O</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Promethean Forethought</span>
+            <span>Logic Domain</span>
+          </div>
+        </div>
+
+        <!-- Java -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">Java</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                OOP Mastery
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Object-Oriented Programming (OOP), encapsulation, inheritance, polymorphism, data structures, and class hierarchies.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">OOP Paradigms</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Class Design</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Data Structures</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Hephaestus' Forge</span>
+            <span>Clean Architecture</span>
+          </div>
+        </div>
+
+        <!-- TESDA NCII Electrical -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">TESDA NCII Electrical</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                Certified Master
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              National Certificate II in Electrical Installation & Management. Circuit wiring, safety protocols, and hardware diagnostics.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">NCII Verified</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Power Safety</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Wiring Standards</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Zeus' High Voltage</span>
+            <span>National Credential</span>
+          </div>
+        </div>
+
+        <!-- React 18 & TypeScript -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">React 18 & TypeScript</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                Proficient
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Modular component architecture, custom hooks, reactive state management, strict type contracts, and single-page apps.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">React Hooks</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Strict Types</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">SPA Design</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Hermes' Velocity</span>
+            <span>Reactive Web</span>
+          </div>
+        </div>
+
+        <!-- Tailwind CSS & Responsive Layouts -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">Tailwind CSS & Styling</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                Advanced
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Utility-first design systems, responsive mobile-first layouts, custom CSS variables, and fluid typography.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Mobile-First</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">CSS Grid</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Theme Variables</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Athena's Aegis</span>
+            <span>Design Tokens</span>
+          </div>
+        </div>
+
+        <!-- Git & GitHub Actions CI/CD -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">Git & GitHub Actions</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                CI/CD Pipeline
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Branching strategies, semantic commits, automated test-and-build scripts, and zero-downtime static site deployment.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">GitHub Actions</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Pages Deploy</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Version Control</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Athena's Strategy</span>
+            <span>Automation</span>
+          </div>
+        </div>
+
+        <!-- HTML5 & Semantic Web -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">HTML5 & Web Standards</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                Foundational
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Semantic outlines, accessibility (a11y), responsive viewports, clean document hierarchies, and web performance.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Semantic Elements</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Accessibility</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">SEO Tags</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Parthenon Pillar</span>
+            <span>Semantic Web</span>
+          </div>
+        </div>
+
+        <!-- Circuit Analysis & Logic -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">Circuits & Logic Design</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                Hardware Core
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Digital logic gates, circuit schematics, breadboard testing, multimeter diagnostics, and power distribution analysis.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Logic Gates</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Multimeter</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Schematics</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Zeus' Lightning</span>
+            <span>Circuit Analysis</span>
+          </div>
+        </div>
+
+        <!-- Computer Engineering Systems -->
+        <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="classical-serif font-bold text-base text-[var(--text-primary)]">Computer Systems & Arch</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--badge-text)]">
+                4th-Year BSCpE
+              </span>
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] mb-3 leading-relaxed">
+              Computer architecture, microprocessors, hardware-to-software interfacing, and systems engineering at ICCT Colleges.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4 font-mono text-[10px]">
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Architecture</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Microprocessors</span>
+              <span class="px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--text-secondary)]">Interfacing</span>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-[var(--border)] flex justify-between items-center text-[11px] font-mono text-[var(--text-muted)]">
+            <span>Chronos Dimension</span>
+            <span>Digital Systems</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Skill Credential Assurance Footer -->
+      <div class="mt-8 p-3 rounded border border-[var(--border)] bg-[var(--surface-subtle)] text-xs text-[var(--text-secondary)] flex flex-col sm:flex-row items-center justify-between gap-2">
+        <span class="font-medium">All technical capabilities aligned with ICCT Colleges Computer Engineering curriculum & TESDA standards.</span>
+        <span class="font-mono text-[11px] text-[var(--text-muted)]">Java • Python • Web • Circuits</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Greek Meander Frieze Divider -->
+  <div class="greek-meander" aria-hidden="true"></div>
+
+  <!-- ======================================================== -->
+  <!-- 8. SOFTWARE & HARDWARE PROJECTS SHOWCASE -->
+  <!-- ======================================================== -->
+  <section id="projects" class="py-16 md:py-20 border-b border-[var(--border)] bg-[var(--bg-subtle)] reveal">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        <div>
+          <div class="text-[11px] font-bold text-[var(--text-muted)] tracking-widest uppercase mb-1">
+            04 // Practical Initiatives
+          </div>
+          <h2 class="classical-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+            Engineering Projects Portfolio
+          </h2>
+          <p class="text-sm text-[var(--text-secondary)] mt-1">
+            Clean, verifiable projects demonstrating software logic and hardware diagnostics.
+          </p>
+        </div>
+
+        <!-- Filter Buttons (Monochrome, Compact) -->
+        <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+          <button onclick="filterProjects('all')" id="filterBtnAll" class="px-3 py-1 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] font-semibold">
+            All
+          </button>
+          <button onclick="filterProjects('software')" id="filterBtnSoftware" class="px-3 py-1 rounded border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--surface)]">
+            Software
+          </button>
+          <button onclick="filterProjects('hardware')" id="filterBtnHardware" class="px-3 py-1 rounded border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--surface)]">
+            Hardware / Circuits
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <!-- Project 1: Python Algorithmic & Automation Suite -->
+        <div class="project-item project-software p-6 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-[11px] font-mono text-[var(--text-muted)] uppercase">Python 3.x</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono border border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--text-secondary)]">2025</span>
+            </div>
+            <h3 class="classical-serif text-lg font-bold text-[var(--text-primary)] mb-2">
+              Python Algorithmic Suite
+            </h3>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed mb-4">
+              A collection of computational and utility scripts in Python to solve engineering logic challenges, process file batches, and automate repetitive workflows.
+            </p>
+            <div class="space-y-1 text-xs text-[var(--text-secondary)] mb-4">
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Data structure implementations</div>
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> File I/O transformation scripts</div>
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Algorithmic efficiency analysis</div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[var(--border)] flex justify-between items-center text-xs font-mono">
+            <span class="text-[var(--text-muted)]">Python • Automation</span>
+            <a href="https://github.com/arieljohnavilesamaba-gif/python-engineering-suite" target="_blank" rel="noreferrer" class="text-[var(--text-primary)] font-bold hover:underline">
+              GitHub →
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: Java OOP Management System -->
+        <div class="project-item project-software p-6 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-[11px] font-mono text-[var(--text-muted)] uppercase">Java 17+</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono border border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--text-secondary)]">2025</span>
+            </div>
+            <h3 class="classical-serif text-lg font-bold text-[var(--text-primary)] mb-2">
+              Java OOP Application System
+            </h3>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed mb-4">
+              Modular desktop management application developed in Java emphasizing encapsulation, inheritance, polymorphism, and structured exception handling.
+            </p>
+            <div class="space-y-1 text-xs text-[var(--text-secondary)] mb-4">
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Strict class encapsulation models</div>
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Data persistence and validation</div>
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Clean code & error recovery</div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[var(--border)] flex justify-between items-center text-xs font-mono">
+            <span class="text-[var(--text-muted)]">Java • OOP Design</span>
+            <a href="https://github.com/arieljohnavilesamaba-gif/java-core-system" target="_blank" rel="noreferrer" class="text-[var(--text-primary)] font-bold hover:underline">
+              GitHub →
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3: Hardware & Circuit Interface -->
+        <div class="project-item project-hardware p-6 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-[11px] font-mono text-[var(--text-muted)] uppercase">Circuits & CpE</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono border border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--text-secondary)]">2024</span>
+            </div>
+            <h3 class="classical-serif text-lg font-bold text-[var(--text-primary)] mb-2">
+              Circuit & Logic Interface
+            </h3>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed mb-4">
+              Integrates digital logic systems and circuit safety standards aligned with TESDA NCII electrical guidelines and Computer Engineering logic.
+            </p>
+            <div class="space-y-1 text-xs text-[var(--text-secondary)] mb-4">
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Circuit schematic interpretation</div>
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Power safety compliance protocols</div>
+              <div class="flex items-center gap-1.5"><span class="text-[var(--text-primary)]">▪</span> Hardware-software interfacing</div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[var(--border)] flex justify-between items-center text-xs font-mono">
+            <span class="text-[var(--text-muted)]">Circuits • TESDA NCII</span>
+            <a href="https://github.com/arieljohnavilesamaba-gif/hardware-circuit-interface" target="_blank" rel="noreferrer" class="text-[var(--text-primary)] font-bold hover:underline">
+              GitHub →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Greek Meander Frieze Divider -->
+  <div class="greek-meander" aria-hidden="true"></div>
+
+  <!-- ======================================================== -->
+  <!-- 9. TIMELINE: EDUCATION & EXPERIENCE (PRESERVED) -->
+  <!-- ======================================================== -->
+  <section id="timeline" class="py-16 md:py-20 border-b border-[var(--border)] bg-[var(--bg)] reveal">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col items-start mb-10">
+        <div class="text-[11px] font-bold text-[var(--text-muted)] tracking-widest uppercase mb-1">
+          05 // Milestone Journey
+        </div>
+        <h2 class="classical-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+          Academic Path & Professional Milestones
+        </h2>
+      </div>
+
+      <!-- Chronological Classical List -->
+      <div class="relative pl-6 sm:pl-8 border-l border-[var(--border-strong)] space-y-8 ml-2 sm:ml-4">
+        
+        <!-- Milestone 1: ICCT Colleges -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 border-[var(--border-strong)] bg-[var(--bg)] flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-[var(--text-primary)]"></div>
+          </div>
+          <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors">
+            <div class="flex flex-wrap justify-between items-center gap-2 mb-1">
+              <span class="font-mono text-xs font-bold text-[var(--text-primary)]">2023 — 2026 (Expected)</span>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Higher Education</span>
+            </div>
+            <h3 class="classical-serif text-lg font-bold text-[var(--text-primary)]">
+              ICCT COLLEGES — Main Campus Cainta
+            </h3>
+            <div class="text-xs font-medium text-[var(--text-secondary)] mb-2">
+              Bachelor of Science in Computer Engineering (BSCpE, 4th Year)
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+              Maintained academic standing focused on computer architecture, object-oriented software engineering, digital systems, microprocessors, and circuit theory.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 2: OJT Student Teacher -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 border-[var(--border-strong)] bg-[var(--bg)] flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-[var(--text-primary)]"></div>
+          </div>
+          <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors">
+            <div class="flex flex-wrap justify-between items-center gap-2 mb-1">
+              <span class="font-mono text-xs font-bold text-[var(--text-primary)]">Completed Practicum</span>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Working Experience</span>
+            </div>
+            <h3 class="classical-serif text-lg font-bold text-[var(--text-primary)]">
+              On-the-Job Training (OJT) as Student Teacher
+            </h3>
+            <div class="text-xs font-medium text-[var(--text-secondary)] mb-2">
+              Instructional Mentorship, Technical Demonstrations & Classroom Guidance
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+              Assisted supervising instructors with instructional delivery, mentored students in learning fundamentals, organized technical sessions, and cultivated strong pedagogical communication skills.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 3: TESDA NCII Certification -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 border-[var(--border-strong)] bg-[var(--bg)] flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-[var(--text-primary)]"></div>
+          </div>
+          <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors">
+            <div class="flex flex-wrap justify-between items-center gap-2 mb-1">
+              <span class="font-mono text-xs font-bold text-[var(--text-primary)]">National Competency Certified</span>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">National Government Certification</span>
+            </div>
+            <h3 class="classical-serif text-lg font-bold text-[var(--text-primary)]">
+              TESDA NCII — Electrical Installation and Management (EIM)
+            </h3>
+            <div class="text-xs font-medium text-[var(--text-secondary)] mb-2">
+              Technical Education and Skills Development Authority (TESDA)
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+              National Certificate II verifying practical expertise in power wiring installation, circuit breaker configuration, blueprint reading, and rigorous electrical safety protocols.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 4: Eastern Star Academy -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 border-[var(--border-strong)] bg-[var(--bg)] flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-[var(--text-primary)]"></div>
+          </div>
+          <div class="p-5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors">
+            <div class="flex flex-wrap justify-between items-center gap-2 mb-1">
+              <span class="font-mono text-xs font-bold text-[var(--text-primary)]">2021 — 2023</span>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Secondary Education</span>
+            </div>
+            <h3 class="classical-serif text-lg font-bold text-[var(--text-primary)]">
+              EASTERN STAR ACADEMY
+            </h3>
+            <div class="text-xs font-medium text-[var(--text-secondary)] mb-2">
+              Humanities and Social Sciences Student (HUMSS)
+            </div>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+              Completed Senior High School with an emphasis on analytical research, critical thinking, written composition, and interpersonal presentation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Greek Meander Frieze Divider -->
+  <div class="greek-meander" aria-hidden="true"></div>
+
+  <!-- ======================================================== -->
+  <!-- 10. CONTACT SECTION: DIRECT VERIFICATION & MESSAGING -->
+  <!-- ======================================================== -->
+  <section id="contact" class="py-16 md:py-20 border-b border-[var(--border)] bg-[var(--bg-subtle)] reveal">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col items-start mb-10">
+        <div class="text-[11px] font-bold text-[var(--text-muted)] tracking-widest uppercase mb-1">
+          06 // Transmission Channel
+        </div>
+        <h2 class="classical-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+          Connect & Collaborate
+        </h2>
+        <p class="text-sm text-[var(--text-secondary)] mt-1">
+          Direct channels to contact Ariel John A. Amaba for engineering collaborations, technical interviews, and inquiries.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Verified Contact Details with 1-Click Copy -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Email Card -->
+          <div class="p-4 rounded-lg border border-[var(--border)] bg-[var(--surface)]">
+            <div class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] mb-1">Verified Email</div>
+            <div class="flex items-center justify-between gap-2">
+              <span id="emailText" class="font-mono text-xs sm:text-sm text-[var(--text-primary)] truncate font-semibold">
+                arieljohnavilesamaba@gmail.com
+              </span>
+              <button
+                onclick="copyToClipboard('arieljohnavilesamaba@gmail.com', 'copyEmailBtn')"
+                id="copyEmailBtn"
+                class="px-2.5 py-1 rounded border border-[var(--border)] hover:border-[var(--border-strong)] text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <!-- Phone Card -->
+          <div class="p-4 rounded-lg border border-[var(--border)] bg-[var(--surface)]">
+            <div class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] mb-1">Contact Phone</div>
+            <div class="flex items-center justify-between gap-2">
+              <a href="tel:09391444631" class="font-mono text-xs sm:text-sm text-[var(--text-primary)] hover:underline font-semibold">
+                09391444631
+              </a>
+              <button
+                onclick="copyToClipboard('09391444631', 'copyPhoneBtn')"
+                id="copyPhoneBtn"
+                class="px-2.5 py-1 rounded border border-[var(--border)] hover:border-[var(--border-strong)] text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <!-- Location & Institution -->
+          <div class="p-4 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-xs font-mono space-y-2 text-[var(--text-secondary)]">
+            <div class="flex justify-between">
+              <span class="text-[var(--text-muted)]">Location:</span>
+              <span class="text-[var(--text-primary)] text-right font-medium">14-1 Broadway St., Ampid 1, San Mateo, Rizal</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--text-muted)]">Campus:</span>
+              <span class="text-[var(--text-primary)] font-medium">ICCT Colleges (Main Campus Cainta)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--text-muted)]">GitHub:</span>
+              <a href="https://github.com/arieljohnavilesamaba-gif" target="_blank" rel="noreferrer" class="text-[var(--text-primary)] hover:underline font-bold">
+                @arieljohnavilesamaba-gif
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Functional Clean Monochrome Form -->
+        <div class="lg:col-span-7 p-6 rounded-lg border border-[var(--border)] bg-[var(--surface)] shadow-sm">
+          <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-mono text-[var(--text-secondary)] mb-1 uppercase tracking-wider">Your Name</label>
+                <input
+                  type="text"
+                  required
+                  class="w-full px-3 py-2 rounded border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] text-xs focus:outline-none focus:border-[var(--border-strong)] transition-colors"
+                  placeholder="e.g. Jane Doe"
+                >
+              </div>
+              <div>
+                <label class="block text-xs font-mono text-[var(--text-secondary)] mb-1 uppercase tracking-wider">Your Email</label>
+                <input
+                  type="email"
+                  required
+                  class="w-full px-3 py-2 rounded border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] text-xs focus:outline-none focus:border-[var(--border-strong)] transition-colors"
+                  placeholder="jane@example.com"
+                >
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-mono text-[var(--text-secondary)] mb-1 uppercase tracking-wider">Subject</label>
+              <input
+                type="text"
+                required
+                class="w-full px-3 py-2 rounded border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] text-xs focus:outline-none focus:border-[var(--border-strong)] transition-colors"
+                placeholder="Software Engineering / Technical Opportunity"
+              >
+            </div>
+            <div>
+              <label class="block text-xs font-mono text-[var(--text-secondary)] mb-1 uppercase tracking-wider">Message</label>
+              <textarea
+                rows="4"
+                required
+                class="w-full px-3 py-2 rounded border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] text-xs focus:outline-none focus:border-[var(--border-strong)] transition-colors resize-none"
+                placeholder="Your detailed message..."
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              id="submitMsgBtn"
+              class="w-full py-2.5 px-4 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] text-xs font-semibold tracking-wider uppercase hover:opacity-90 transition-opacity"
+            >
+              Send Transmission →
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 11. MINIMALIST FOOTER -->
+  <!-- ======================================================== -->
+  <footer class="py-10 border-t border-[var(--border)] bg-[var(--bg)] text-xs text-[var(--text-muted)] font-mono">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span class="classical-serif font-bold text-[var(--text-primary)]">ArielAmabaPortfolio</span>
+        <span>•</span>
+        <span>© 2026 Ariel John A. Amaba. ICCT Colleges BSCpE.</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/arieljohnavilesamaba-gif" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] transition-colors">
+          GitHub
+        </a>
+        <a href="#hero" class="hover:text-[var(--text-primary)] transition-colors flex items-center gap-1 font-semibold">
+          <span>Top</span>
+          <span>↑</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- 12. OFFICIAL RÉSUMÉ MODAL (PRINTABLE & MONOCHROME) -->
+  <!-- ======================================================== -->
+  <div id="resumeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-[var(--modal-overlay)] backdrop-blur-sm animate-in fade-in duration-150">
+    <div
+      class="w-full max-w-2xl bg-[var(--modal-bg)] border border-[var(--border-strong)] rounded-lg shadow-xl p-6 sm:p-8 overflow-y-auto max-h-[88vh] text-[var(--text-primary)]"
+      onclick="event.stopPropagation()"
+    >
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center pb-4 border-b border-[var(--border)] mb-6">
+        <div>
+          <h2 class="classical-serif text-xl sm:text-2xl font-bold">
+            ARIEL JOHN A. AMABA
+          </h2>
+          <p class="text-xs font-mono text-[var(--text-muted)] tracking-wider uppercase mt-0.5">
+            4th-Year Computer Engineering Student • ICCT Colleges Main Campus Cainta
+          </p>
+        </div>
+        <button
+          onclick="toggleResumeModal(false)"
+          class="p-1 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] text-lg leading-none"
+          aria-label="Close modal"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Printable Document Content -->
+      <div class="space-y-6 text-xs text-[var(--text-secondary)] leading-relaxed">
+        
+        <!-- Contact Strip with Candidate Photo -->
+        <div class="p-3.5 rounded border border-[var(--border)] bg-[var(--surface-subtle)] font-mono text-xs flex flex-col sm:flex-row items-center gap-4">
+          <div class="w-16 h-16 rounded border border-[var(--border-strong)] overflow-hidden shrink-0 bg-[var(--surface)]">
+            <img
+              src="assets/images/profile.jpg"
+              alt="Ariel John A. Amaba - Candidate"
+              class="w-full h-full object-cover"
+              style="object-position: center 32%;"
+              onerror="if(this.src.indexOf('media_1792505024991_d4551121.jpg')===-1){this.src='file:///C:/Users/Ayee%20Aviles/.gemini/antigravity/brain/c3a38b6a-4ca9-488c-9b2b-d0911361bf09/.user_uploaded/media_1792505024991_d4551121.jpg';}else{this.style.display='none';}"
+            />
+          </div>
+          <div class="space-y-0.5 w-full">
+            <div><strong>Candidate:</strong> Ariel John A. Amaba (BSCpE 4th-Year Candidate)</div>
+            <div><strong>Phone:</strong> 09391444631 • <strong>Email:</strong> arieljohnavilesamaba@gmail.com</div>
+            <div><strong>Address:</strong> 14-1 Broadway St., Ampid 1, San Mateo, Rizal</div>
+            <div><strong>GitHub:</strong> https://github.com/arieljohnavilesamaba-gif</div>
+          </div>
+        </div>
+
+        <!-- Objective / About Me -->
+        <div>
+          <h3 class="classical-serif text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] mb-1">
+            Academic Objective
+          </h3>
+          <p class="italic pl-3 border-l-2 border-[var(--border-strong)]">
+            "I am a 4th-year Computer Engineering student at ICCT Colleges Main Campus Cainta. I am eager to learn about coding to enhance and improve my knowledge about programming."
+          </p>
+        </div>
+
+        <!-- Education -->
+        <div>
+          <h3 class="classical-serif text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] mb-2">
+            Education
+          </h3>
+          <div class="space-y-3 font-mono">
+            <div>
+              <div class="font-bold text-[var(--text-primary)] text-sm">ICCT COLLEGES (Main Campus Cainta)</div>
+              <div>Bachelor of Science in Computer Engineering (BSCpE, Expected 2026)</div>
+              <div class="text-[11px] text-[var(--text-muted)]">Coursework: OOP, Data Structures, Digital Logic Design, Microprocessors, Computer Architecture.</div>
+            </div>
+            <div>
+              <div class="font-bold text-[var(--text-primary)] text-sm">EASTERN STAR ACADEMY (2021 — 2023)</div>
+              <div>Humanities and Social Sciences Student (HUMSS)</div>
+              <div class="text-[11px] text-[var(--text-muted)]">Senior High School studies in analytical research, critical thinking, and technical writing.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Working Experience -->
+        <div>
+          <h3 class="classical-serif text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] mb-1">
+            Working Experience
+          </h3>
+          <div class="font-mono">
+            <div class="font-bold text-[var(--text-primary)] text-sm">On-the-Job Training (OJT) as Student Teacher</div>
+            <div class="text-[11px] text-[var(--text-muted)]">Instructional Support, Technical Demonstrations & Academic Mentoring</div>
+          </div>
+        </div>
+
+        <!-- Skills & Certifications (ZERO PERCENTAGES) -->
+        <div>
+          <h3 class="classical-serif text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] mb-2">
+            Skills & National Certification
+          </h3>
+          <div class="space-y-1.5 font-mono text-xs">
+            <div><strong>⚡ Certification:</strong> TESDA NCII Electrical Installation and Management (Certified Master)</div>
+            <div><strong>💻 Programming:</strong> Java (OOP), Python (Algorithms & Scripting), TypeScript, React 18, Tailwind CSS, HTML5/CSS3</div>
+            <div><strong>⚙ DevOps & Tools:</strong> Git, GitHub Actions CI/CD Pipeline, VS Code, Digital Logic Analysis</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="mt-6 pt-4 border-t border-[var(--border)] flex justify-end gap-3 font-mono text-xs">
+        <button
+          onclick="window.print()"
+          class="px-4 py-2 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] font-semibold uppercase hover:opacity-90"
+        >
+          Print / Save PDF
+        </button>
+        <button
+          onclick="toggleResumeModal(false)"
+          class="px-4 py-2 rounded border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 13. JAVASCRIPT CONTROLLERS: THEME TOGGLE, CLI, MODAL -->
+  <!-- ======================================================== -->
+  <script>
+    // -------------------------------------------------------------
+    // Theme Management Engine (Persistent Monochrome Mode)
+    // -------------------------------------------------------------
+    function updateThemeUi(theme) {
+      const sunIcon = document.getElementById('themeIconSun');
+      const moonIcon = document.getElementById('themeIconMoon');
+      const labelText = document.getElementById('themeLabelText');
+
+      if (theme === 'dark') {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+        labelText.textContent = 'LIGHT';
+      } else {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+        labelText.textContent = 'DARK';
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      localStorage.setItem('theme', newTheme);
+      updateThemeUi(newTheme);
+    }
+
+    // Initialize UI on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      updateThemeUi(activeTheme);
+    });
+
+    // -------------------------------------------------------------
+    // Restrained Typewriter Engine
+    // -------------------------------------------------------------
+    const roles = [
+      "Computer Engineering (4th Year)",
+      "Java & Python Programming",
+      "TESDA NCII Electrical Systems",
+      "Modern Web Engineering (React + TS)",
+      "ICCT Colleges Main Campus Cainta"
+    ];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriterEl = document.getElementById('typewriterText');
+
+    function typeWriter() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typewriterEl.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterEl.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 30 : 75;
+
+      if (!isDeleting && charIndex === currentRole.length) {
+        speed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        speed = 350;
+      }
+      setTimeout(typeWriter, speed);
+    }
+    document.addEventListener('DOMContentLoaded', typeWriter);
+
+    // -------------------------------------------------------------
+    // Terminal Tab Switcher
+    // -------------------------------------------------------------
+    function switchTab(tab) {
+      const tabs = ['profile', 'python', 'cli'];
+      tabs.forEach(t => {
+        const content = document.getElementById(`tabContent${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (t === tab) {
+          content.classList.remove('hidden');
+          btn.className = "px-2 py-0.5 rounded text-[11px] font-mono border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text-primary)] font-semibold";
+        } else {
+          content.classList.add('hidden');
+          btn.className = "px-2 py-0.5 rounded text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)]";
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Monochrome Interactive CLI
+    // -------------------------------------------------------------
+    function runCli(cmd) {
+      const output = document.getElementById('cliOutput');
+      if (cmd === 'clear') {
+        output.textContent = "ariel@cpe-terminal:~$ screen cleared.\n> Ready.";
+        return;
+      }
+      let res = `ariel@cpe-terminal:~$ ${cmd}\n`;
+      if (cmd === 'skills') {
+        res += `[
+  { "languages": ["Python (Advanced)", "Java (OOP Mastery)", "TypeScript (Proficient)"] },
+  { "hardware": "TESDA NCII Electrical Installation and Management (Certified)" },
+  { "web": ["React 18", "Tailwind CSS", "Vite", "HTML5 Semantic Standards"] },
+  { "devops": ["Git", "GitHub Actions CI/CD Passing"] }
+]`;
+      } else if (cmd === 'credentials') {
+        res += `CREDENTIALS:
+- BSCpE 4th-Year Candidate @ ICCT Colleges (Main Campus Cainta, 2026)
+- National Certificate II: Electrical Installation & Management (TESDA)
+- Student Teacher Practicum (OJT Mentorship)`;
+      } else if (cmd === 'contact') {
+        res += `CONTACT:
+- Phone   : 09391444631
+- Email   : arieljohnavilesamaba@gmail.com
+- GitHub  : https://github.com/arieljohnavilesamaba-gif
+- Location: 14-1 Broadway St., Ampid 1, San Mateo, Rizal`;
+      }
+      output.textContent = res;
+    }
+
+    // -------------------------------------------------------------
+    // Projects Filter
+    // -------------------------------------------------------------
+    function filterProjects(category) {
+      const allBtn = document.getElementById('filterBtnAll');
+      const softBtn = document.getElementById('filterBtnSoftware');
+      const hardBtn = document.getElementById('filterBtnHardware');
+      const items = document.querySelectorAll('.project-item');
+
+      [allBtn, softBtn, hardBtn].forEach(btn => {
+        btn.className = "px-3 py-1 rounded border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--surface)]";
+      });
+
+      if (category === 'all') {
+        allBtn.className = "px-3 py-1 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] font-semibold";
+        items.forEach(el => el.classList.remove('hidden'));
+      } else if (category === 'software') {
+        softBtn.className = "px-3 py-1 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] font-semibold";
+        items.forEach(el => {
+          if (el.classList.contains('project-software')) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        });
+      } else if (category === 'hardware') {
+        hardBtn.className = "px-3 py-1 rounded border border-[var(--border-strong)] bg-[var(--text-primary)] text-[var(--bg)] font-semibold";
+        items.forEach(el => {
+          if (el.classList.contains('project-hardware')) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        });
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Clipboard Helper
+    // -------------------------------------------------------------
+    function copyToClipboard(text, btnId) {
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById(btnId);
+      const original = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => {
+        btn.textContent = original;
+      }, 2000);
+    }
+
+    // -------------------------------------------------------------
+    // Résumé Modal Toggle
+    // -------------------------------------------------------------
+    function toggleResumeModal(show) {
+      const modal = document.getElementById('resumeModal');
+      if (show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Mobile Menu Toggle
+    // -------------------------------------------------------------
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // -------------------------------------------------------------
+    // Contact Form Handler
+    // -------------------------------------------------------------
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitMsgBtn');
+      btn.textContent = "Transmitting Message...";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.textContent = "✓ Message Received Successfully";
+        setTimeout(() => {
+          btn.textContent = "Send Transmission →";
+          btn.disabled = false;
+          e.target.reset();
+        }, 3000);
+      }, 700);
+    }
+
+    // -------------------------------------------------------------
+    // Scroll Reveal Observer
+    // -------------------------------------------------------------
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
